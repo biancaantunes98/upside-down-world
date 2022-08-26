@@ -1,6 +1,10 @@
-import app from "./firebase/app.js"
-import { } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firebase.js'
+import app from "./app.js"
+import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js'
 
-export function subscribeTohellfireClub(subscription){
-    console.log('subscription', subscription)
+export async function subscribeTohellfireClub(subscription) {
+    debugger
+    const db = getFirestore(app)
+    const hellfireClubCollection = collection(db, 'hellfire-club')
+    const docRef = await addDoc(hellfireClubCollection, subscription)
+    return docRef.id
 }
