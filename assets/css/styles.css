@@ -341,6 +341,18 @@ textarea:focus-visible {
     color: var(--primary-color-contrast);
     text-align: left;
   }
+
+  #section-form .form-container form .success-message {
+    color: var(--primary-color-contrast);
+    align-self: center;    
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  #successMessage {
+    display: none;
+  }
+
   
   #section-form .form-container form button {
     border: none;

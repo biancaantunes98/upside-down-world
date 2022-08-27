@@ -14,7 +14,13 @@ const alertCharacter = document.getElementById('alertCharacter')
 
 const btnSubscribe = document.getElementById('btnSubscribe')
 
+const formContainer = document.getElementById('formContainer')
+const successMessage = document.getElementById('successMessage')
+
+const btnNewSubscription = document.getElementById('btnNewSubscription')
+
 btnSubscribe.addEventListener('click', async () => {
+    debugger
     ClearAlerts()
     const subscription = {
         name: txtName.value,
@@ -25,12 +31,12 @@ btnSubscribe.addEventListener('click', async () => {
 
     const isEmail = IsEmail(subscription.email)
     const isInputsFilled = IsInputsFilled(subscription)
-    
+
     if (isInputsFilled && isEmail) {
         const subscriptionId = await subscribeTohellfireClub(subscription)
-        console.log('Inscrito com sucesso: ' + subscriptionId)
+        ShowSuccessMessage()
         ClearInputs()
-    } 
+    }
 })
 
 function IsEmail(email) {
@@ -56,7 +62,7 @@ function IsInputsFilled(subscription) {
     if (subscription.email == '') {
         alertEmail.innerHTML = 'O campo email deve ser preenchido'
         alertEmail.style.visibility = "visible"
-        isInputsFilled = false  
+        isInputsFilled = false
     }
 
     if (subscription.level == '') {
@@ -85,4 +91,15 @@ function ClearAlerts() {
     alertLevel.style.visibility = "hidden"
     alertCharacter.style.visibility = "hidden"
 }
+
+function ShowSuccessMessage() {
+    formContainer.style.display = 'none'
+    successMessage.style.display = 'inline'
+}
+
+btnNewSubscription.addEventListener('click', () => {
+    successMessage.style.display = 'none'
+    formContainer.style.display = 'inline'
+})
+
 
