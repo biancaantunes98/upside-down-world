@@ -97,7 +97,7 @@ textarea {
   background-color: var(--field-background-color);
   color: var(--primary-color-contrast);
   padding: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 4px;
 }
 
 label {
@@ -353,6 +353,14 @@ textarea:focus-visible {
   #section-form .form-container form button:hover {
     background-color: var(--primary-color-contrast);
     color: var(--field-background-color);
+  }
+
+  .alert-message {
+    color: #ffffff;
+    font-size: 12px;
+    text-align: right;
+    margin-bottom: 15px;
+    visibility: hidden;
   }
 
   footer {

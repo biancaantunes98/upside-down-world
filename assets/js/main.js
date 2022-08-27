@@ -7,9 +7,15 @@ const txtEmail = document.getElementById('txtEmail')
 const txtLevel = document.getElementById('txtLevel')
 const txtCharacter = document.getElementById('txtCharacter')
 
+const alertName = document.getElementById('alertName')
+const alertEmail = document.getElementById('alertEmail')
+const alertLevel = document.getElementById('alertLevel')
+const alertCharacter = document.getElementById('alertCharacter')
+
 const btnSubscribe = document.getElementById('btnSubscribe')
 
 btnSubscribe.addEventListener('click', async () => {
+    ClearAlerts()
     const subscription = {
         name: txtName.value,
         email: txtEmail.value,
@@ -17,15 +23,14 @@ btnSubscribe.addEventListener('click', async () => {
         character: txtCharacter.value
     }
 
-    const isInputsFilled = IsInputsFilled(subscription)
     const isEmail = IsEmail(subscription.email)
-
+    const isInputsFilled = IsInputsFilled(subscription)
+    
     if (isInputsFilled && isEmail) {
         const subscriptionId = await subscribeTohellfireClub(subscription)
         console.log('Inscrito com sucesso: ' + subscriptionId)
-    } else {
-        alert('Digite um email válido')
-    }
+        ClearInputs()
+    } 
 })
 
 function IsEmail(email) {
@@ -34,23 +39,50 @@ function IsEmail(email) {
     if (validRegex.test(email)) {
         return true
     } else {
+        alertEmail.innerHTML = 'Digite um email válido'
+        alertEmail.style.visibility = 'visible'
         return false
     }
 }
 
 function IsInputsFilled(subscription) {
-    if (subscription.name == '')
-        return false
+    var isInputsFilled = true
 
-    if (subscription.email == '')
-        return false
+    if (subscription.name == '') {
+        alertName.style.visibility = "visible"
+        isInputsFilled = false
+    }
 
-    if (subscription.level == '')
-        return false
+    if (subscription.email == '') {
+        alertEmail.innerHTML = 'O campo email deve ser preenchido'
+        alertEmail.style.visibility = "visible"
+        isInputsFilled = false  
+    }
 
-    if (subscription.character == '')
-        return false
+    if (subscription.level == '') {
+        alertLevel.style.visibility = "visible"
+        isInputsFilled = false
+    }
 
-    return true
+    if (subscription.character == '') {
+        alertCharacter.style.visibility = "visible"
+        isInputsFilled = false
+    }
+
+    return isInputsFilled
+}
+
+function ClearInputs() {
+    txtName.value = ""
+    txtEmail.value = ""
+    txtLevel.value = ""
+    txtCharacter.value = ""
+}
+
+function ClearAlerts() {
+    alertName.style.visibility = "hidden"
+    alertEmail.style.visibility = "hidden"
+    alertLevel.style.visibility = "hidden"
+    alertCharacter.style.visibility = "hidden"
 }
 
